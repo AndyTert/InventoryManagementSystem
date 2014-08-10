@@ -5,8 +5,12 @@ import java.util.List;
 
 import ims.domain.Part;
 import ims.domain.PartAssembler;
+import ims.domain.User;
+import ims.domain.UserAssembler;
+import ims.domain.UserDto;
 import ims.dto.PartDto;
 import ims.repository.PartRepository;
+import ims.repository.UserRepository;
 
 public class Facade {
 
@@ -60,6 +64,26 @@ public class Facade {
 			return null;
 		}
 		return PartAssembler.assemble(part);
+	}
+
+	public void addUser(UserDto userDto) {
+		User user = new User();
+		user.setPassword(userDto.getPassword());
+		user.setEmail(userDto.getEmail());
+		
+		UserRepository ur = new UserRepository();
+		ur.addUser(user);
+		
+		
+	}
+
+	public UserDto findUserByEmail(String email) {
+		UserRepository ur = new UserRepository();
+		User user = ur.findUserByEmail(email);
+		if(user == null) {
+			return null;
+		}
+		return UserAssembler.assemble(user);
 	}
 
 }

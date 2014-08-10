@@ -1,5 +1,6 @@
 package ims.tests;
 
+import ims.domain.UserDto;
 import ims.dto.PartDto;
 import ims.facade.FacadeFactory;
 import junit.framework.TestCase;
@@ -9,13 +10,14 @@ public class UserTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
-		// TODO: DELETE USERS
 		TestCleanup.cleanUp();
 	}
 	
 	public void test_addUser() {
 		//Assemble
-		UserDto userDto;
+		UserDto userDto = new UserDto();
+		userDto.setEmail("test@gmail.com");
+		userDto.setPassword("rainbows123");
 
 		//Act
 		FacadeFactory.getFacade().addUser(userDto);
